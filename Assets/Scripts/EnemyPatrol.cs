@@ -17,7 +17,7 @@ public class EnemyPatrol : MonoBehaviour
             _wayPoints.Add(wayPoint);
     }
 
-    void Update()
+    private void Update()
     {
         if (_currentPoint >= _wayPoints.Count)
         {
