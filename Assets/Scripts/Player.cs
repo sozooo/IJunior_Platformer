@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -30,8 +28,6 @@ public class Player : MonoBehaviour
     {
         if(IsGrounded)
             _playerAnimation.Grounded(IsGrounded);
-
-        Debug.Log(IsGrounded);
 
         Move();
         Flip();
