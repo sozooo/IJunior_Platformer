@@ -4,69 +4,53 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
 {
-    private const string Grounded = "Grounded";
-    private const string HorizontalAxis = "Horizontal";
+    private const string GroundedBool = "Grounded";
     private const string AnimState = "AnimState";
     private const string JumpTrigger = "Jump";
     private const string AirSpeedY = "AirSpeedY";
+    private const int IdleState = 0;
+    private const int RunState = 1;
 
     private Animator _animator;
-    private Rigidbody2D _rigidbody2D;
-    private bool _isGrounded = true;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    public void Grounded(bool isGrounded)
     {
-        if(_rigidbody2D.velocity.y == 0f)
-        {
-            _isGrounded = true;
-            _animator.SetBool(Grounded, _isGrounded);
-        }
-
-        Fall();
-        Run();
-        Jump();
-        Idle();
+        _animator.SetBool(GroundedBool, isGrounded);
     }
 
-    private void Idle()
+    public void Idle()
     {
-        if (_isGrounded && Input.GetAxisRaw(HorizontalAxis) == 0f)
-        {
-            _animator.SetInteger(AnimState, 0);
-        }
+        _animator.SetInteger(AnimState, IdleState);
     }
 
-    private void Jump()
+    public void Jump(bool isJumping, bool isGrounded)
     {
-        if (Input.GetAxisRaw(JumpTrigger) > 0f && _rigidbody2D.velocity.y > 0f)
+        if (isJumping)
         {
             _animator.SetTrigger(JumpTrigger);
-            _isGrounded = false;
-            _animator.SetBool(Grounded, _isGrounded);
+            _animator.SetBool(GroundedBool, isGrounded);
         }
     }
 
-    private void Run()
+    public void Run(bool isRunning)
     {
-        if(_isGrounded && Input.GetAxisRaw(HorizontalAxis) != 0f)
+        if(isRunning)
         {
-            _animator.SetInteger(AnimState, 1);
+            _animator.SetInteger(AnimState, RunState);
         }
     }
 
-    private void Fall()
+    public void Fall(bool isFaling, float velocity, bool isGrounded)
     {
-        if(_rigidbody2D.velocity.y < 0f)
+        if(isFaling)
         {
-            _isGrounded = false;
-            _animator.SetBool(Grounded, _isGrounded);
-            _animator.SetFloat(AirSpeedY, _rigidbody2D.velocity.y);
+            _animator.SetFloat(AirSpeedY, velocity);
+            _animator.SetBool(GroundedBool, isGrounded);
         }
     }
 }
