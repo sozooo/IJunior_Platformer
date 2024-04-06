@@ -1,32 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyPatrol))]
 [RequireComponent(typeof(PlayerDetector))]
+[RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyPatrol enemyPatrol;
-    [SerializeField] private PlayerDetector playerDetector;
-
+    private EnemyPatrol enemyPatrol;
+    private PlayerDetector playerDetector;
+    private EnemyMovement enemyMovement;
     private Player player;
+
+    private bool isPlayerFound => player != null;
 
     private void Awake()
     {
         enemyPatrol = transform.GetComponent<EnemyPatrol>();
         playerDetector = transform.GetComponent<PlayerDetector>();
+        enemyMovement = transform.GetComponent<EnemyMovement>();
     }
 
     private void Update()
     {
-        if (player == null)
+        if (isPlayerFound == false)
         {
             enemyPatrol.Patrol();
-            player = playerDetector.Detect();
         }
         else
         {
-            //chase
+            enemyMovement.MoveToAim(player);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if(isPlayerFound == false)
+            player = playerDetector.Detect();
     }
 }
