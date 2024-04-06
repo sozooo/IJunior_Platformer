@@ -27,11 +27,12 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetInteger(AnimState, IdleState);
     }
 
-    public void Jump(bool isJumping, bool isGrounded)
+    public void Jump(bool isJumping, float velocity, bool isGrounded)
     {
         if (isJumping)
         {
             _animator.SetTrigger(JumpTrigger);
+            _animator.SetFloat(AirSpeedY, velocity);
             _animator.SetBool(GroundedBool, isGrounded);
         }
     }

@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         float yVelocity = _rigidbody2D.velocity.y;
 
         _playerMovement.Jump(Input.GetAxisRaw(JumpAxis) != 0f && IsGrounded, _rigidbody2D);
-        _playerAnimation.Jump(yVelocity > 0f, IsGrounded);
+        _playerAnimation.Jump(yVelocity > 0f && Input.GetAxisRaw(JumpAxis) != 0, yVelocity, IsGrounded);
         _playerAnimation.Fall(yVelocity < 0f, yVelocity, IsGrounded);
     }
 
