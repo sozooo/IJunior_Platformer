@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b227dd713595b8449f75e013e10f795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _damage: 15
   _maxHealth: 20
   _knockBack: 4
 --- !u!50 &733175513
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b227dd713595b8449f75e013e10f795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 10
   _maxHealth: 100
   _knockBack: 1
 --- !u!1 &1434744328
@@ -2981,6 +2981,10 @@ PrefabInstance:
     - target: {fileID: 954779798625256120, guid: 8d3343e8637012c4597bb84161497565, type: 3}
       propertyPath: m_Name
       value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 954779798625256120, guid: 8d3343e8637012c4597bb84161497565, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1560683570460547211, guid: 8d3343e8637012c4597bb84161497565, type: 3}
       propertyPath: m_RootOrder
