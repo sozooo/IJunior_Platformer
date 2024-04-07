@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Collector : MonoBehaviour
 {

@@ -21,13 +21,13 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerFound == false)
+        if (isPlayerFound)
         {
-            enemyPatrol.Patrol();
+            enemyMovement.MoveToAim(player);
         }
         else
         {
-            enemyMovement.MoveToAim(player);
+            enemyPatrol.Patrol();
         }
     }
 
