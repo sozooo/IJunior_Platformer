@@ -15,7 +15,7 @@ public class Collector : MonoBehaviour
         {
             Destroy(collision.gameObject);
 
-            transform.GetComponent<Attacker>().Heal(medkit.RestoreAmount);
+            transform.GetComponent<Characteristics>().Heal(medkit.RestoreAmount);
         }
     }
 }

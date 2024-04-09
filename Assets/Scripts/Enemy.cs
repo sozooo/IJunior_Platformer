@@ -5,35 +5,35 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
-    private EnemyPatrol enemyPatrol;
-    private PlayerDetector playerDetector;
-    private EnemyMovement enemyMovement;
-    private Player player;
+    private EnemyPatrol _enemyPatrol;
+    private PlayerDetector _playerDetector;
+    private EnemyMovement _enemyMovement;
+    private Player _player;
 
-    private bool isPlayerFound => player != null;
+    private bool _isPlayerFound => _player != null;
 
     private void Awake()
     {
-        enemyPatrol = transform.GetComponent<EnemyPatrol>();
-        playerDetector = transform.GetComponent<PlayerDetector>();
-        enemyMovement = transform.GetComponent<EnemyMovement>();
+        _enemyPatrol = transform.GetComponent<EnemyPatrol>();
+        _playerDetector = transform.GetComponent<PlayerDetector>();
+        _enemyMovement = transform.GetComponent<EnemyMovement>();
     }
 
     private void Update()
     {
-        if (isPlayerFound)
+        if (_isPlayerFound)
         {
-            enemyMovement.MoveToAim(player);
+            _enemyMovement.MoveToAim(_player);
         }
         else
         {
-            enemyPatrol.Patrol();
+            _enemyPatrol.Patrol();
         }
     }
 
     private void FixedUpdate()
     {
-        if(isPlayerFound == false)
-            player = playerDetector.Detect();
+        if(_isPlayerFound == false)
+            _player = _playerDetector.Detect();
     }
 }
