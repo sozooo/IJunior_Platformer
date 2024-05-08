@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -5,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private KeyCode _vampirismHotKey;
+
     private const string HorizontalAxis = "Horizontal";
     private const string JumpAxis = "Jump";
 
@@ -13,6 +16,8 @@ public class Player : MonoBehaviour
 
     private Vector2 _flipScale;
     private Rigidbody2D _rigidbody2D;
+
+    public event Action OnVampirismEnable;
 
     private bool IsGrounded => _rigidbody2D.velocity.y == 0f;
 
@@ -28,6 +33,11 @@ public class Player : MonoBehaviour
     {
         if(IsGrounded)
             _playerAnimation.Grounded(IsGrounded);
+
+        if (Input.GetKeyDown(_vampirismHotKey))
+        {
+            OnVampirismEnable?.Invoke();
+        }
 
         Move();
         Flip();

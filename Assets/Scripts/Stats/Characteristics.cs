@@ -27,6 +27,7 @@ public class Characteristics : MonoBehaviour
     }
 
     public event Action<float> OnHealthChanged;
+    public event Action<Characteristics> OnDeath;
 
     private void Start()
     {
@@ -44,12 +45,14 @@ public class Characteristics : MonoBehaviour
     {
         CurrentHealth = Mathf.Clamp(_currentHealth - damage, 0f, _maxHealth);
 
-        if (_currentHealth <= 0)
+        if (_currentHealth == 0f)
             Dead();
     }
 
     public void Dead()
     {
+        OnDeath?.Invoke(transform.GetComponent<Characteristics>());
+
         Destroy(gameObject);
     }
 }
